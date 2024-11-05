@@ -63,3 +63,31 @@ function updateContainer(container, newTime) {
     updateNumber(last, time[1]);
   }
 }
+
+
+function updateNumber(element, number) {
+    //element.lastElementChild.textContent = number
+    //== Clone the current last child of the element
+    var second = element.lastElementChild.cloneNode(true)
+    //== Update the text content of the cloned element with the new number
+    second.textContent = number
+
+    //== Append the cloned element to the element
+    element.appendChild(second)
+
+    //== Add a class 'move' to trigger animation
+    element.classList.add('move')
+
+
+    //== After 990ms, remove the 'move' class (this stops the animation)
+    setTimeout(function () {
+        element.classList.remove('move')
+    }, 990)
+
+    //== After 990ms, remove the first child of the element (the old number)
+    setTimeout(function () {
+        element.removeChild(element.firstElementChild)
+    }, 990)
+}
+
+setInterval(updateTime, 100)
